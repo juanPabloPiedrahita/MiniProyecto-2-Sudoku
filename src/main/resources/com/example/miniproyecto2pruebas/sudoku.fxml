@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.control.Button?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.miniproyecto2pruebas.SudokuController">
+    <GridPane fx:id="gridPane" layoutX="14.0" layoutY="14.0" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0">
+        <!-- Los TextFields se agregarán desde el controlador en tiempo de ejecución -->
+        <Button text="Ayuda" onAction="#handleHelpButton" GridPane.rowIndex="6" GridPane.columnIndex="0" GridPane.columnSpan="6"/>
+    </GridPane>
+</AnchorPane>
+

@@ -129,4 +129,18 @@ public class SudokuController {
 
         return style.toString();
     }
+
+    public void solveBoard() {
+        if (sudokuBoard.solve()) {
+            for (int row = 0; row < 6; row++) {
+                for (int col = 0; col < 6; col++) {
+                    int value = sudokuBoard.getNumberAt(row, col);
+                    textFields[row][col].setText(String.valueOf(value));
+                    textFields[row][col].setStyle("-fx-background-color: lightgreen;");
+                }
+            }
+        } else {
+            System.out.println("El tablero no tiene solución.");
+        }
+    }
 }

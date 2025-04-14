@@ -111,4 +111,26 @@ public class SudokuBoard {
             System.out.println();
         }
     }
+
+    public boolean solve() {
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 6; col++) {
+                if (getNumberAt(row, col) == 0) {
+                    for (int num = 1; num <= 6; num++) {
+                        if (isSafe(row, col, num)) {
+                            setNumberAt(row, col, num);
+                            if (solve()) {
+                                return true;
+                            }
+                            // backtrack
+                            setNumberAt(row, col, 0);
+                        }
+                    }
+                    // si no encontramos ningún número válido
+                    return false;
+                }
+            }
+        }
+        return true; // tablero completo
+    }
 }

@@ -11,10 +11,10 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sudoku-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("home-view.fxml"));
         Parent root = loader.load();
 
-        primaryStage.setTitle("Sudoku 6x6");
+        primaryStage.setTitle("Inicio - Sudoku 6x6");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();

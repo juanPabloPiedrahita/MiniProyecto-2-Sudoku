@@ -6,15 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.miniproyecto2pruebas.HomeController">
    <children>
-      <ImageView fitHeight="112.0" fitWidth="194.0" layoutX="205.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="215.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="73.0" />
+      <ImageView fx:id="logoImage" fitHeight="112.0" fitWidth="194.0" layoutX="205.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="215.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="73.0" />
       <Label layoutX="148.0" layoutY="221.0" prefHeight="25.0" prefWidth="322.0" text="Pon a prueba tu razonamiento, mientras te diviertes." AnchorPane.bottomAnchor="154.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="221.0">
          <font>
             <Font name="Cambria" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="287.0" layoutY="285.0" mnemonicParsing="false" text="Jugar" />
+      <Button fx:id="playButton" layoutX="287.0" layoutY="285.0" mnemonicParsing="false" onAction="#handlePlayButton" text="Jugar" />
    </children>
 </AnchorPane>

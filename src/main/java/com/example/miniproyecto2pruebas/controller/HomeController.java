@@ -28,7 +28,8 @@ public class HomeController {
 
     @FXML
     public void handlePlayButton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sudoku-view.fxml"));
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("sudoku-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/miniproyecto2pruebas/sudoku-view.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setTitle("Sudoku 6x6");

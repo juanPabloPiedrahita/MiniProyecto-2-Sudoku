@@ -1,4 +1,4 @@
-package com.example.miniproyecto2pruebas;
+package com.example.miniproyecto2pruebas.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,6 +1,5 @@
-package com.example.miniproyecto2pruebas;
+package com.example.miniproyecto2pruebas.controller;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,6 +37,5 @@ public class HomeController {
 
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
-
     }
 }

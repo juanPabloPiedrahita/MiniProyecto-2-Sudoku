@@ -6,4 +6,8 @@ module com.example.miniproyecto2pruebas {
 
     opens com.example.miniproyecto2pruebas to javafx.fxml;
     exports com.example.miniproyecto2pruebas;
+    opens com.example.miniproyecto2pruebas.model to javafx.fxml;
+    exports com.example.miniproyecto2pruebas.model;
+    exports com.example.miniproyecto2pruebas.controller;
+    opens com.example.miniproyecto2pruebas.controller to javafx.fxml;
 }

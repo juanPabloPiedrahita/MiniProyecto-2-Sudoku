@@ -44,12 +44,14 @@ public class SudokuController {
                 tf.setStyle(getBorderStyle(row, col));
 
                 int value = sudokuBoard.getNumberAt(row, col);
+                String baseStyle = getBorderStyle(row, col);
                 if (value != 0) {
                     tf.setText(String.valueOf(value));
                     tf.setDisable(true);
-                    tf.setStyle("-fx-background-color: lightgray; -fx-font-weight: bold;");
+                    tf.setStyle(baseStyle + "-fx-background-color: lightgray; -fx-font-weight: bold;");
                 } else {
                     final int r = row, c = col;
+                    tf.setStyle(baseStyle);
                     editableFields.add(tf);
                     tf.setOnKeyReleased(event  -> {
                         String newVal = tf.getText();
@@ -67,11 +69,11 @@ public class SudokuController {
                             boolean inBlock = !sudokuBoard.isBlockValid(r, c, num);
                             if (sudokuBoard.isSafe(r, c, num) && !inRow && !inCol && !inBlock) {
                                 sudokuBoard.setNumberAt(r, c, num);
-                                tf.setStyle(getBorderStyle(r, c)); // válido
+                                tf.setStyle(baseStyle); // válido
                                 errorLabel.setText("");
                                 moveToNextEmptyField(tf);
                             } else {
-                                tf.setStyle(getBorderStyle(r, c) + "-fx-background-color: pink;"); // inválido
+                                tf.setStyle(baseStyle + "-fx-background-color: pink;"); // inválido
 
                                 StringBuilder message = new StringBuilder("Error: el número ");
                                 message.append(num).append(" ya está en esta parte: ");
@@ -99,7 +101,7 @@ public class SudokuController {
                 boardGridPane.add(tf, col, row);
             }
         }
-        helpLabel.setText("¿Atascado? Aquí tienes " + remainingHelps + " ayudas.");
+        helpLabel.setText("¿Atascado? Aquí tienes " + remainingHelps + " ayudas.  --> ");
         errorLabel.setText("");
     }
 
@@ -140,11 +142,11 @@ public class SudokuController {
                                 tf.setStyle(getBorderStyle(r, c) + "-fx-background-color: lightgreen;");
 
                                 remainingHelps--;
-                                helpLabel.setText("¿Atascado? Aquí tienes " + remainingHelps + " ayudas.");
+                                helpLabel.setText("¿Atascado? Aquí tienes " + remainingHelps + " ayudas.  --> ");
 
                                 if(remainingHelps == 0){
                                     helpButton.setDisable(true);
-                                    helpLabel.setText("Ya no hay ayudas.");
+                                    helpLabel.setText("Has gastado todas las ayudas.");
                                 }
 
                                 return;
@@ -197,10 +199,15 @@ public class SudokuController {
     }
 
     private String getBorderStyle(int row, int col) {
-        String style = "-fx-border-color: black; -fx-border-width: ";
-        style += (row % 2 == 0 ? "2 " : "1 ") + (col == 5 ? "2 " : "1 ") +
-                ((row == 5) ? "2 " : "1 ") + (col % 3 == 0 ? "2;" : "1;");
-        return style;
+        StringBuilder style = new StringBuilder("-fx-border-color: #4A64F5; -fx-border-width:");
+
+        // Grosor por lado: top, right, bottom, left
+        style.append((row % 2 == 0 ? 2 : 1)).append("px ")
+                .append((col % 3 == 2 ? 2 : 1)).append("px ")
+                .append((row % 2 == 1 ? 2 : 1)).append("px ")
+                .append((col % 3 == 0 ? 2 : 1)).append("px; ");
+
+        return style.toString();
     }
 }
 

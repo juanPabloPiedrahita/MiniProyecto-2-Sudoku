@@ -7,18 +7,24 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sudoku.fxml")));
-        primaryStage.setTitle("Sudoku 6x6");
-        primaryStage.setScene(new Scene(root, 340, 340));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("home-view.fxml"));
+        Parent root = loader.load();
+
+        primaryStage.setTitle("Inicio - Sudoku 6x6");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         primaryStage.show();
+
+        // Si en el futuro deseas usar el controlador directamente:
+        // SudokuController controller = loader.getController();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 }
+

@@ -10,9 +10,9 @@ public class SudokuBoard {
 
     public SudokuBoard() {
         board = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            ArrayList<Integer> column = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0));
-            board.add(column);
+        for (int row = 0; row < 6; row++) {
+            ArrayList<Integer> rowList = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0));
+            board.add(rowList);
         }
     }
 
@@ -26,7 +26,7 @@ public class SudokuBoard {
                 {4, 5, 3, 5}  // Bloque 5: filas 4-5, columnas 3-5
         };
 
-        for (int[] block : blocks) {
+        for (int[] block : blocks) { //toma el comportamiento de cada bloque 2x3.
             int rowStart = block[0];
             int rowEnd = block[1];
             int colStart = block[2];
@@ -55,7 +55,7 @@ public class SudokuBoard {
 
                 for (int num : candidates) {
                     if (isSafe(row, col, num)) {
-                        board.get(col).set(row, num);  // <- Insertamos en board[column][row]
+                        board.get(row).set(col, num);  // <- Insertamos en board[row][column]
                         placedCount++;
                         break;
                     }
@@ -65,24 +65,24 @@ public class SudokuBoard {
     }
 
     public int getNumberAt(int row, int col) {
-        return board.get(col).get(row);
+        return board.get(row).get(col);
     }
 
     public void setNumberAt(int row, int col, int num) {
-        board.get(col).set(row, num);
+        board.get(row).set(col, num);
     }
 
     public boolean isSafe(int row, int col, int num) {
         // Verificar fila
         for (int c = 0; c < 6; c++) {
-            if (board.get(c).get(row) == num) {
+            if (board.get(row).get(c) == num) {
                 return false;
             }
         }
 
         // Verificar columna
         for (int r = 0; r < 6; r++) {
-            if (board.get(col).get(r) == num) {
+            if (board.get(r).get(col) == num) {
                 return false;
             }
         }
@@ -93,7 +93,7 @@ public class SudokuBoard {
 
         for (int r = blockRowStart; r < blockRowStart + 2; r++) {
             for (int c = blockColStart; c < blockColStart + 3; c++) {
-                if (board.get(c).get(r) == num) {
+                if (board.get(r).get(c) == num) {
                     return false;
                 }
             }
@@ -106,7 +106,7 @@ public class SudokuBoard {
     public void printBoard() {
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 6; col++) {
-                System.out.print(board.get(col).get(row) + " ");
+                System.out.print(board.get(row).get(col) + " ");
             }
             System.out.println();
         }
@@ -132,5 +132,30 @@ public class SudokuBoard {
             }
         }
         return true; // tablero completo
+    }
+
+    public boolean isRowValid(int row, int col, int num) {
+        for (int c = 0; c < 6; c++) {
+            if (c != col && board.get(row).get(c) == num) return false;
+        }
+        return true;
+    }
+
+    public boolean isColumnValid(int row, int col, int num) {
+        for (int r = 0; r < 6; r++) {
+            if (r != row && board.get(r).get(col) == num) return false;
+        }
+        return true;
+    }
+
+    public boolean isBlockValid(int row, int col, int num) {
+        int startRow = (row / 2) * 2;
+        int startCol = (col / 3) * 3;
+        for (int r = startRow; r < startRow + 2; r++) {
+            for (int c = startCol; c < startCol + 3; c++) {
+                if ((r != row || c != col) && board.get(r).get(c) == num) return false;
+            }
+        }
+        return true;
     }
 }

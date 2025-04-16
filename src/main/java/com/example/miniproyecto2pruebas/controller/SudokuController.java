@@ -1,5 +1,7 @@
 package com.example.miniproyecto2pruebas.controller;
 
+import com.example.miniproyecto2pruebas.view.SudokuStage;
+import com.example.miniproyecto2pruebas.model.SudokuBoard;
 import com.example.miniproyecto2pruebas.model.SudokuBoard;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;

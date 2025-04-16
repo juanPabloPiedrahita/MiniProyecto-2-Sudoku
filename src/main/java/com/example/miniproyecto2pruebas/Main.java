@@ -1,30 +1,19 @@
 package com.example.miniproyecto2pruebas;
 
+import com.example.miniproyecto2pruebas.view.HomeStage;
+import com.example.miniproyecto2pruebas.view.SudokuStage;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
-
-import java.io.IOException;
 
 public class Main extends Application {
+
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("home-view.fxml"));
-        Parent root = loader.load();
-
-        primaryStage.setTitle("Inicio - Sudoku 6x6");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-
-        // Si en el futuro deseas usar el controlador directamente:
-        // SudokuController controller = loader.getController();
+    public void start(Stage primaryStage) throws Exception {
+        new HomeStage(); // Mostramos directamente la pantalla de inicio
     }
 
     public static void main(String[] args) {
         launch(args);
-    }
+}
 }
 

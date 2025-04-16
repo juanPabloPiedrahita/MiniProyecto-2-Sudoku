@@ -1,5 +1,9 @@
+
+
 package com.example.miniproyecto2pruebas.controller;
 
+import com.example.miniproyecto2pruebas.view.HomeStage;
+import com.example.miniproyecto2pruebas.view.SudokuStage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,13 +32,8 @@ public class HomeController {
 
     @FXML
     public void handlePlayButton(ActionEvent event) throws IOException {
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("sudoku-view.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/miniproyecto2pruebas/sudoku-view.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("Sudoku 6x6");
-        stage.setScene(new Scene(root));
-        stage.show();
+        new SudokuStage(); // 👈 Se usa la clase personalizada
+        ((Stage) playButton.getScene().getWindow()).close(); // 👈 Cerramos esta ventana
 
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();

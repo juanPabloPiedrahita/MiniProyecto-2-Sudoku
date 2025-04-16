@@ -1,14 +1,20 @@
 package com.example.miniproyecto2pruebas.controller;
 
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
+import com.example.miniproyecto2pruebas.view.HomeStage;
+import com.example.miniproyecto2pruebas.view.SudokuStage;
+
+import java.io.IOException;
 
 public class ButtonActionAdapter {
 
     // Clase interna para el botón de Instrucciones
     public static class InstructionsButtonAction implements IButtonAction {
         @Override
-        public void execute(ActionEvent event) {
+        public void execute(ActionEvent event) throws IOException {
             String instrucciones = """
                     🎯 Objetivo:
                     Completa la cuadrícula 6x6 con los números del 1 al 6.
@@ -30,20 +36,18 @@ public class ButtonActionAdapter {
     }
     public static class PlayButtonAction implements IButtonAction {
         @Override
-        public void execute(javafx.event.ActionEvent event) {
-            try {
-                // Abre la ventana del Sudoku
-                new com.example.miniproyecto2pruebas.view.SudokuStage();
+        public void execute(ActionEvent event) throws IOException {
 
-                // Cierra la ventana actual
-                // Se puede obtener el Stage de la fuente del evento.
-                javafx.scene.Node source = (javafx.scene.Node) event.getSource();
-                javafx.stage.Stage currentStage = (javafx.stage.Stage) source.getScene().getWindow();
-                currentStage.close();
-            } catch (java.io.IOException e) {
-                e.printStackTrace();
-                // Aquí podrías mostrar un error al usuario o gestionar la excepción según convenga.
-            }
+            // Abre la ventana del Sudoku
+            SudokuStage.getInstance();
+
+            // Cierra la ventana actual
+            // Se puede obtener el Stage de la fuente del evento.
+            /*Node source = (javafx.scene.Node) event.getSource();
+            Stage currentStage = (javafx.stage.Stage) source.getScene().getWindow();
+            currentStage.close();*/
+            HomeStage.deleteInstance();
+            // Aquí podrías mostrar un error al usuario o gestionar la excepción según convenga.
         }
     }
 }

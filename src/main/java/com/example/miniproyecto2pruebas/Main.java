@@ -9,7 +9,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        new HomeStage(); // Mostramos directamente la pantalla de inicio
+        HomeStage.getInstance(); // Mostramos directamente la pantalla de inicio
     }
 
     public static void main(String[] args) {

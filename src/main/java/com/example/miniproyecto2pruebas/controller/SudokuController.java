@@ -1,8 +1,6 @@
 package com.example.miniproyecto2pruebas.controller;
 
 
-import com.example.miniproyecto2pruebas.view.SudokuStage;
-import com.example.miniproyecto2pruebas.model.SudokuBoard;
 import com.example.miniproyecto2pruebas.model.SudokuBoard;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -34,6 +32,7 @@ public class SudokuController{
     private SudokuBoard sudokuBoard;
     private int remainingHelps = 4;
     private List<TextField> editableFields = new ArrayList<>();
+    private Map<String, String> errorMap = new HashMap<>();
 
     @FXML
     public void initialize() {
@@ -74,10 +73,12 @@ public class SudokuController{
                             if (sudokuBoard.isSafe(r, c, num) && !inRow && !inCol && !inBlock) {
                                 sudokuBoard.setNumberAt(r, c, num);
                                 tf.setStyle(baseStyle); // válido
-                                errorLabel.setText("");
+                                errorMap.remove(r + "," + c);
+                                updateErrorLabel();
+                                //errorLabel.setText("");
                                 moveToNextEmptyField(tf);
                             } else {
-                                tf.setStyle(baseStyle + "-fx-background-color: pink;"); // inválido
+                                tf.setStyle(baseStyle + "-fx-background-color: #F5A9A9;"); // inválido
 
                                 StringBuilder message = new StringBuilder("Error: el número ");
                                 message.append(num).append(" ya está en esta parte: ");
@@ -92,12 +93,16 @@ public class SudokuController{
                                 if(inBlock) parts.add("el bloque.");
 
                                 message.append(String.join(" ", parts));
-                                errorLabel.setText(message.toString());
+                                errorMap.put(r + "," + c, message.toString());
+                                updateErrorLabel();
+                                //errorLabel.setText(message.toString());
                             }
                         } else {
                             sudokuBoard.setNumberAt(r, c, 0);
                             tf.setStyle(getBorderStyle(r, c)); // vacío
-                            errorLabel.setText("");
+                            errorMap.remove(r + "," + c);
+                            updateErrorLabel();
+                            //errorLabel.setText("");
                         }
                     });
                 }
@@ -163,7 +168,11 @@ public class SudokuController{
     @FXML
     private void handleInstructionsButton(javafx.event.ActionEvent event) {
         IButtonAction action = new ButtonActionAdapter.InstructionsButtonAction();
-        action.execute(event);
+        try {
+            action.execute(event);
+        } catch (java.io.IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     /*
     private void handleInstructionsButton() {
@@ -185,6 +194,16 @@ public class SudokuController{
         alert.setContentText(instrucciones);
         alert.showAndWait();
     }*/
+
+    private void updateErrorLabel() {
+        StringBuilder allErrors = new StringBuilder();
+
+        for(Map.Entry<String, String> entry : errorMap.entrySet()) {
+            allErrors.append(entry.getValue()).append("\n");
+        }
+
+        errorLabel.setText(allErrors.toString().trim());
+    }
 
     private void moveToNextEmptyField(TextField currentField) {
         int currentIndex = editableFields.indexOf(currentField);

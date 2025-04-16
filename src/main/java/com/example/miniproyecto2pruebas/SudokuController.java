@@ -27,6 +27,7 @@ public class SudokuController {
 
     private SudokuBoard sudokuBoard;
     private int remainingHelps = 4;
+    private List<TextField> editableFields = new ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -47,9 +48,15 @@ public class SudokuController {
                     tf.setStyle("-fx-background-color: lightgray; -fx-font-weight: bold;");
                 } else {
                     final int r = row, c = col;
-                    tf.textProperty().addListener((obs, oldVal, newVal) -> {
+                    editableFields.add(tf);
+                    tf.setOnKeyReleased(event  -> {
+                        String newVal = tf.getText();
+                        if(newVal.length() > 1){
+                            tf.setText(newVal.substring(0, 1));
+                            return;
+                        }
                         if (!newVal.matches("[1-6]?")) {
-                            tf.setText(oldVal);
+                            tf.setText("");
                         } else if (!newVal.isEmpty()) {
                             int num = Integer.parseInt(newVal);
 
@@ -60,6 +67,7 @@ public class SudokuController {
                                 sudokuBoard.setNumberAt(r, c, num);
                                 tf.setStyle(getBorderStyle(r, c)); // válido
                                 errorLabel.setText("");
+                                moveToNextEmptyField(tf);
                             } else {
                                 tf.setStyle(getBorderStyle(r, c) + "-fx-background-color: pink;"); // inválido
 
@@ -142,6 +150,26 @@ public class SudokuController {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private void moveToNextEmptyField(TextField currentField) {
+        int currentIndex = editableFields.indexOf(currentField);
+
+        for(int i = currentIndex + 1; i < editableFields.size(); i++) {
+            TextField next = editableFields.get(i);
+            if (next.getText().isEmpty()) {
+                next.requestFocus();
+                return;
+            }
+        }
+
+        for(int i = 0; i < currentIndex; i++) {
+            TextField next = editableFields.get(i);
+            if(next.getText().isEmpty()) {
+                next.requestFocus();
+                return;
             }
         }
     }

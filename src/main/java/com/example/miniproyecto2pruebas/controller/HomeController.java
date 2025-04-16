@@ -31,11 +31,8 @@ public class HomeController {
     }
 
     @FXML
-    public void handlePlayButton(ActionEvent event) throws IOException {
-        new SudokuStage(); // 👈 Se usa la clase personalizada
-        ((Stage) playButton.getScene().getWindow()).close(); // 👈 Cerramos esta ventana
-
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+    public void handlePlayButton(javafx.event.ActionEvent event) {
+        IButtonAction action = new ButtonActionAdapter.PlayButtonAction();
+        action.execute(event);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.miniproyecto2pruebas.controller;
 
+
 import com.example.miniproyecto2pruebas.view.SudokuStage;
 import com.example.miniproyecto2pruebas.model.SudokuBoard;
 import com.example.miniproyecto2pruebas.model.SudokuBoard;
@@ -12,7 +13,7 @@ import javafx.scene.layout.GridPane;
 
 import java.util.*;
 
-public class SudokuController {
+public class SudokuController{
 
     //public Button helpButton;
     @FXML
@@ -26,6 +27,9 @@ public class SudokuController {
 
     @FXML
     private Button helpButton;
+
+    @FXML
+    private Button instructionsButton;
 
     private SudokuBoard sudokuBoard;
     private int remainingHelps = 4;
@@ -107,22 +111,20 @@ public class SudokuController {
 
     @FXML
     private void handleHelpButton() {
-        //if(remainingHelps <= 0) return;
-        //helpLabel.setText("¿Atascado? Aquí tienes X ayudas.");
-        List<int[]> emptyCells = new ArrayList<>();
+        List<List<Integer>> emptyCells = new ArrayList<>();
 
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 6; col++) {
                 if (sudokuBoard.getNumberAt(row, col) == 0) {
-                    emptyCells.add(new int[]{row, col});
+                    emptyCells.add(Arrays.asList(row, col));
                 }
             }
         }
 
         Collections.shuffle(emptyCells);
-        for (int[] cell : emptyCells) {
-            int row = cell[0];
-            int col = cell[1];
+        for (List<Integer> cell : emptyCells) {
+            int row = cell.get(0);
+            int col = cell.get(1);
 
             List<Integer> candidates = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
             Collections.shuffle(candidates);
@@ -144,7 +146,7 @@ public class SudokuController {
                                 remainingHelps--;
                                 helpLabel.setText("¿Atascado? Aquí tienes " + remainingHelps + " ayudas.  --> ");
 
-                                if(remainingHelps == 0){
+                                if (remainingHelps == 0) {
                                     helpButton.setDisable(true);
                                     helpLabel.setText("Has gastado todas las ayudas.");
                                 }
@@ -157,6 +159,32 @@ public class SudokuController {
             }
         }
     }
+
+    @FXML
+    private void handleInstructionsButton(javafx.event.ActionEvent event) {
+        IButtonAction action = new ButtonActionAdapter.InstructionsButtonAction();
+        action.execute(event);
+    }
+    /*
+    private void handleInstructionsButton() {
+        String instrucciones = """
+            🎯 Objetivo:
+            Completa la cuadrícula 6x6 con los números del 1 al 6.
+
+            ✅ Reglas:
+            - No puede repetirse ningún número en la misma fila.
+            - No puede repetirse ningún número en la misma columna.
+            - No puede repetirse ningún número en el mismo bloque 2x3.
+
+            🧠 Consejo:
+            Usa la lógica, no adivinanzas. ¡Y diviértete!
+            """;
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+        alert.setTitle("Instrucciones");
+        alert.setHeaderText("Cómo jugar al Sudoku 6x6");
+        alert.setContentText(instrucciones);
+        alert.showAndWait();
+    }*/
 
     private void moveToNextEmptyField(TextField currentField) {
         int currentIndex = editableFields.indexOf(currentField);

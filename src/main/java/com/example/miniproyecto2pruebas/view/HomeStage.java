@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.scene.image.Image;
 
 public class HomeStage extends Stage {
 
@@ -14,6 +15,10 @@ public class HomeStage extends Stage {
         setTitle("Inicio - Sudoku 6x6");
         setResizable(false);
         setScene(scene);
-        show(); // Mostrar la ventana
+        // Establece el icono
+        //Solo cambia la el "icon.png" y ya.
+        Image icon = new Image(String.valueOf(getClass().getResource("/com/example/miniproyecto2pruebas/icon.png")));
+        getIcons().add(icon);
+        show(); // Mostrar la ventana
     }
 }

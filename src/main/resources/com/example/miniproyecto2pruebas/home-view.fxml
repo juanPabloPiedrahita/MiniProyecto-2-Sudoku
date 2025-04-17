@@ -6,14 +6,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.miniproyecto2pruebas.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F0F5A9;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.miniproyecto2pruebas.controller.HomeController">
    <children>
-      <ImageView fx:id="logoImage" fitHeight="112.0" fitWidth="194.0" layoutX="205.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="215.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="73.0" />
-      <Label layoutX="148.0" layoutY="221.0" prefHeight="25.0" prefWidth="322.0" text="Pon a prueba tu razonamiento, mientras te diviertes." AnchorPane.bottomAnchor="154.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="221.0">
+      <ImageView fx:id="logoImage" fitHeight="121.0" fitWidth="213.0" layoutX="203.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="86.0" />
+      <Label layoutX="130.0" layoutY="207.0" prefHeight="25.0" prefWidth="359.0" text="Pon a prueba tu razonamiento, mientras te diviertes" textAlignment="CENTER" textFill="#6e40c9" AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="111.0" AnchorPane.topAnchor="207.0">
          <font>
-            <Font name="Cambria" size="14.0" />
+            <Font name="Caveat Regular" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="playButton" layoutX="287.0" layoutY="285.0" mnemonicParsing="false" onAction="#handlePlayButton" text="Jugar" />
+      <Button fx:id="playButton" layoutX="274.0" layoutY="265.0" mnemonicParsing="false" onAction="#handlePlayButton" prefHeight="37.0" prefWidth="71.0" style="-fx-background-color: #124ebc; -fx-background-radius: 10;" text="Jugar" textFill="WHITE">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Button>
    </children>
 </AnchorPane>
